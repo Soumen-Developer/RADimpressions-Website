@@ -1,0 +1,15 @@
+▲ Next.js 16.3.3
+- Local:         http://localhost:3112
+- Network:       http://10.8.0.10:3112
+✓ Ready in 193ms
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\YOGSHI because it would include your home directory (C:\Users\YOGSHI).
+ To use this directory, set `outputFileTracingRoot` in your Next.js config.
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\YOGSHI\Documents\Default Project\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\YOGSHI\Documents\Default Project\radimpression\package-lock.json
+
+✓ Running next.config.ts took 51ms

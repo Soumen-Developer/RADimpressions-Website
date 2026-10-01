@@ -1,0 +1,954 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* RADIMPRESSION design tokens — single source for every value.       */
+/* Mapped into Tailwind via @theme inline below. No hex in components. */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* brand spectrum — the full price. No single colour runs this brand:
+     mix, clash, rotate. (Do not alter the nine spectrum values.) */
+  --rad-red: #ed1b24;
+  --rad-charcoal: #58595b;
+  --rad-teal: #00aa9f;
+  --rad-teal-bright: #2cc7ba;
+  --rad-navy: #354ea2;
+  --rad-gold: #ffca08;
+  --rad-green: #02824f;
+  --rad-sky: #b9d7f1;
+  --rad-ink: #1c213e;
+  --rad-slate: #555f6b;
+  --rad-paper: #ffffff;
+  --rad-charcoal-dark: #231f20; /* footer + deep surfaces */
+
+  /* footer — the closing surface (deepest point of the room) + watermark */
+  --rad-footer-bg: #0a0708;
+  --rad-footer-watermark: #261d20;
+
+  /* tint surfaces — for colour-blocking cards without full-saturation type
+     clashes. All pass WCAG AA on ink text per the brand system. */
+  --rad-red-tint: #fde6e7;
+  --rad-teal-tint: #e0f5f3;
+  --rad-gold-tint: #fff4c9;
+  --rad-navy-tint: #e4e8f6;
+  --rad-green-tint: #e0f2ea;
+  --rad-sky-tint: #e8f1fb;
+
+  /* text-safe variants — for type on light backgrounds */
+  --rad-red-ink: #c2151c;
+  --rad-teal-ink: #007a72;
+  --rad-gold-ink: #8a6200;
+  --rad-navy-ink: #28367a;
+  --rad-green-ink: #01603a;
+  --rad-charcoal-ink: #58595b;
+
+  /* semantic tokens — the room. Night-editorial: every surface is a warm
+     near-black, content hangs as luminous artifacts, the four pillar colours
+     and brand red do the lighting. Components reference these. */
+  --bg-page: #171113;
+  --bg-soft: #1e1719;
+  --bg-tint: #251c1f;
+  --bg-deep: #0b0809;
+  --text-primary: #f2ece4;
+  --text-body: #cbc1b7;
+  --text-muted: #978b81;
+  --text-on-deep: #f2ece4;
+  --rule: rgba(242, 236, 228, 0.14);
+  --rule-soft: rgba(242, 236, 228, 0.08);
+  --action: #ed1b24;
+  --action-loud: #ff3228;
+  --focus: #ed1b24;
+  --link: #2cc7ba;
+
+  /* pillar colour system — injects the full spectrum across the disciplines */
+  --pillar-strategy: #354ea2;
+  --pillar-strategy-text: #354ea2;
+  --pillar-comms: #00aa9f;
+  --pillar-comms-text: #007a72;
+  --pillar-media: #ffca08;
+  --pillar-media-text: #8a6200;
+  --pillar-complete: #02824f;
+  --pillar-complete-text: #02824f;
+
+  /* type */
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
+
+  /* shape + depth — chunky radii per the brand system */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(28, 33, 62, 0.06),
+    0 10px 28px -18px rgba(28, 33, 62, 0.3);
+  --shadow-panel: 0 2px 4px rgba(28, 33, 62, 0.07),
+    0 28px 56px -28px rgba(28, 33, 62, 0.36);
+
+  /* motion */
+  --ease-brand: cubic-bezier(0.3, 0, 0, 1);
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+
+  /* header capsule system */
+  --ink: #1c1c1c;
+  --gutter: clamp(1rem, 2.6vw, 2.25rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tailwind v4 mapping                                                  */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --color-rad-red: var(--rad-red);
+  --color-rad-red-ink: var(--rad-red-ink);
+  --color-rad-red-tint: var(--rad-red-tint);
+  --color-rad-charcoal: var(--rad-charcoal);
+  --color-rad-charcoal-ink: var(--rad-charcoal-ink);
+  --color-rad-charcoal-dark: var(--rad-charcoal-dark);
+  --color-rad-teal: var(--rad-teal);
+  --color-rad-teal-ink: var(--rad-teal-ink);
+  --color-rad-teal-tint: var(--rad-teal-tint);
+  --color-rad-navy: var(--rad-navy);
+  --color-rad-navy-ink: var(--rad-navy-ink);
+  --color-rad-navy-tint: var(--rad-navy-tint);
+  --color-rad-gold: var(--rad-gold);
+  --color-rad-gold-ink: var(--rad-gold-ink);
+  --color-rad-gold-tint: var(--rad-gold-tint);
+  --color-rad-green: var(--rad-green);
+  --color-rad-green-ink: var(--rad-green-ink);
+  --color-rad-green-tint: var(--rad-green-tint);
+  --color-rad-sky: var(--rad-sky);
+  --color-rad-sky-tint: var(--rad-sky-tint);
+  --color-rad-ink: var(--rad-ink);
+  --color-rad-slate: var(--rad-slate);
+  --color-rad-paper: var(--rad-paper);
+
+  --color-surface-page: var(--bg-page);
+  --color-surface-soft: var(--bg-soft);
+  --color-surface-tint: var(--bg-tint);
+  --color-surface-deep: var(--bg-deep);
+  --color-surface-deepest: var(--rad-charcoal-dark);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-body: var(--text-body);
+  --color-text-muted: var(--text-muted);
+  --color-text-on-deep: var(--text-on-deep);
+  --color-rule: var(--rule);
+  --color-rule-soft: var(--rule-soft);
+  --color-action: var(--action);
+  --color-action-loud: var(--action-loud);
+  --color-focus: var(--focus);
+  --color-link: var(--link);
+
+  --color-pillar-strategy: var(--pillar-strategy);
+  --color-pillar-strategy-text: var(--pillar-strategy-text);
+  --color-pillar-comms: var(--pillar-comms);
+  --color-pillar-comms-text: var(--pillar-comms-text);
+  --color-pillar-media: var(--pillar-media);
+  --color-pillar-media-text: var(--pillar-media-text);
+  --color-pillar-complete: var(--pillar-complete);
+  --color-pillar-complete-text: var(--pillar-complete-text);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-panel: var(--shadow-panel);
+
+  --ease-brand: var(--ease-brand);
+  --ease-snap: var(--ease-snap);
+}
+
+/* type scale — 1.25 ratio, 16px base */
+@theme {
+  --text-xs: 13px;
+  --text-xs--line-height: 1.5;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.55;
+  --text-base: 16px;
+  --text-base--line-height: 1.65;
+  --text-lg: 20px;
+  --text-lg--line-height: 1.55;
+  --text-xl: 25px;
+  --text-xl--line-height: 1.35;
+  --text-xl--letter-spacing: -0.005em;
+  --text-2xl: 31px;
+  --text-2xl--line-height: 1.25;
+  --text-2xl--letter-spacing: -0.01em;
+  --text-3xl: 39px;
+  --text-3xl--line-height: 1.15;
+  --text-3xl--letter-spacing: -0.015em;
+  --text-4xl: 49px;
+  --text-4xl--line-height: 1.08;
+  --text-4xl--letter-spacing: -0.02em;
+  --text-5xl: 61px;
+  --text-5xl--line-height: 1.02;
+  --text-5xl--letter-spacing: -0.02em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--rad-red);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Editorial helpers                                                   */
+/* ------------------------------------------------------------------ */
+
+/* mono eyebrow — the typographic signature, ALL CAPS allowed only here */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* free-form / interactive helpers ------------------------------------- */
+
+/* oversized editorial display type */
+.display-xl {
+  font-size: clamp(64px, 15vw, 220px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+.display-lg {
+  font-size: clamp(44px, 9vw, 140px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+/* cursor-parallax layer inside a .cursor-stage */
+.plx {
+  will-change: transform;
+}
+.plx--lg {
+  transform: translate(calc(var(--mx, 0) * 0.6px), calc(var(--my, 0) * 0.5px));
+}
+.plx--md {
+  transform: translate(calc(var(--mx, 0) * 1.2px), calc(var(--my, 0) * 0.9px));
+}
+.plx--sm {
+  transform: translate(calc(var(--mx, 0) * 2.2px), calc(var(--my, 0) * 1.7px));
+}
+.plx--tilt {
+  transform: rotate(calc(var(--mx, 0) * 0.5deg)) translate(calc(var(--mx, 0) * 0.8px), calc(var(--my, 0) * 0.6px));
+}
+
+/* hide scrollbars on horizontal scrub rails while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* pinned scroll-scene stage: the sticky child fills one viewport height */
+.scene {
+  height: 100vh;
+}
+.scene--short {
+  height: 70vh;
+}
+.scene-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mono-sm {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
+/* colour-block card — a printed swatch in the dark room: the pastel tint reads
+   as a physical card pinned to the wall. Ink text, hairline edge. */
+.color-block {
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  color: var(--rad-ink);
+  border: 1px solid rgba(28, 33, 62, 0.08);
+}
+
+.color-block--red { background: var(--rad-red-tint); }
+.color-block--teal { background: var(--rad-teal-tint); }
+.color-block--gold { background: var(--rad-gold-tint); }
+.color-block--navy { background: var(--rad-navy-tint); }
+.color-block--green { background: var(--rad-green-tint); }
+.color-block--sky { background: var(--rad-sky-tint); }
+
+/* rotated sticker badge — maximalist brand signal */
+.sticker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.sticker--rotate {
+  transform: rotate(-3deg);
+}
+
+/* ── night-editorial helpers ─────────────────────────────────────────
+   The room's visual language: giant outlined chapter numerals that sit
+   behind content, serif-italic accents inside display lines, and ledger
+   rows (index + statement + arrow) that replace card grids. All motion
+   disabled under prefers-reduced-motion via the block at the bottom. */
+
+/* ghost chapter numeral — an outlined, oversized number. Default = the
+   room version (ivory stroke); the --swatch modifier recolours it. */
+.ghost-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 90;
+  font-size: clamp(7rem, 24vw, 19rem);
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(242, 236, 228, 0.16);
+  user-select: none;
+  pointer-events: none;
+}
+.ghost-num--grid {
+  font-size: clamp(4.5rem, 12vw, 11rem);
+  -webkit-text-stroke: 1px rgba(242, 236, 228, 0.1);
+}
+
+/* serif italic accent — the editorial counterpoint to Bricolage display */
+.text-serif-it {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ledger row — index | statement | action, hairline divided, hover-red */
+.ledger-row {
+  display: flex;
+  width: 100%;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--rule-soft);
+  transition: border-color 0.2s ease;
+}
+.ledger-row:hover,
+.ledger-row:focus-visible {
+  border-color: var(--rad-red);
+}
+
+/* thin axial ruler used to start a chapter (left hairline + kick) */
+.chapter-kick {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.chapter-kick::before {
+  content: "";
+  width: 2.2rem;
+  height: 1px;
+  background: var(--rad-red);
+  flex-shrink: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+.display,
+.display-alt {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 90;
+  text-wrap: balance;
+}
+
+.lede {
+  font-size: 20px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.measure {
+  max-width: 72ch;
+}
+
+.measure-editorial {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+/* body measure 62–72 chars */
+p {
+  max-width: 72ch;
+}
+
+@keyframes rad-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rad-reveal {
+  animation: rad-fade-up var(--dur-slow) var(--ease-brand) both;
+}
+
+/* horizontal scroll within a band only */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── premium motion helpers (all disabled under prefers-reduced-motion) ── */
+
+@keyframes rad-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: rad-marquee 30s linear infinite;
+}
+.marquee-track--reverse {
+  animation-direction: reverse;
+  animation-duration: 36s;
+}
+
+@keyframes rad-float {
+  0%, 100% { transform: translateY(0) rotate(var(--floats, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--floats, 0deg)); }
+}
+.rad-float {
+  animation: rad-float 7s ease-in-out infinite;
+}
+
+/* content swap-in for pinned, scroll-driven scenes */
+@keyframes rad-swap {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rad-swap {
+  animation: rad-swap 460ms var(--ease-brand) both;
+}
+
+/* availability pulsing dot in the footer (disabled under reduced motion) */
+@keyframes rad-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.72); }
+}
+.rad-pulse {
+  animation: rad-pulse 2s ease-in-out infinite;
+}
+
+/* ── the red thread + hero pinwheel — journey connective tissue ──────── */
+
+@keyframes rad-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* rotating SVG group (pinwheel carries the four pillar colours) */
+.rad-rotate {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: rad-spin 56s linear infinite;
+}
+
+/* chapter spine — fixed glass rail with the red progress fill + sliding bead */
+.thread-rail {
+  position: fixed;
+  left: calc(var(--gutter, 2rem) * 0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  width: 6px;
+  height: 44vh;
+  min-height: 180px;
+  max-height: 330px;
+  pointer-events: none;
+}
+.thread-spine {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-pill);
+  background: rgba(23, 17, 19, 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(242, 236, 228, 0.14);
+  overflow: hidden;
+}
+.thread-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--rad-red);
+  border-radius: inherit;
+  transform-origin: top center;
+}
+.thread-bead {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.thread-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--rad-red);
+  border: 2px solid rgba(242, 236, 228, 0.85);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+.thread-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  border-radius: var(--radius-pill);
+  background: rgba(23, 17, 19, 0.72);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(242, 236, 228, 0.14);
+  padding: 0.4rem 0.8rem;
+  color: var(--text-primary, #f2ece4);
+}
+.thread-tag i {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rad-red);
+  flex-shrink: 0;
+}
+.thread-tag b {
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Header — floating capsule pills that dock on scroll.                 */
+/* Depth comes only from blur + the hairline rule, never               */
+/* gradients, glows, or drop shadows.                                   */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --pill-h: clamp(42px, 3.3vw, 50px);
+  --pill-h-docked: clamp(36px, 2.8vw, 42px);
+  --cap-radius: 999px;
+}
+
+/* brand-red 2px scroll-progress bar along the bottom edge of the bar.
+   Width is driven by a --rad-header-progress inline var (0 → 1).      */
+.rad-scrollbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--rad-red);
+  transform-origin: left center;
+  transform: scaleX(var(--rad-header-progress, 0));
+  will-change: transform;
+}
+
+/* ── floating capsule ─────────────────────────────────────────────── */
+.cap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+  color: var(--ink, #1c1c1c);
+  border: 0;
+  border-radius: var(--cap-radius);
+  height: var(--pill-h);
+  padding: 0 1.15rem;
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  will-change: transform;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cap:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 3px;
+}
+
+/* base colour — override UA -webkit-link on <a> */
+.cap,
+.cap:link,
+.cap:visited {
+  color: var(--ink, #585858);
+}
+
+/* ── fill circle — grows from cursor entry point ── */
+.cap:has(.fill) {
+  overflow: hidden;
+}
+.cap .fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--ink, #1c1c1c);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+.cap .label {
+  position: relative;
+  z-index: 1;
+  transition: color 0.18s ease;
+}
+
+/* hover / focus / lit / active → white label + teal chevron */
+.cap:hover .label,
+.cap:focus-visible .label,
+.cap.lit .label,
+.cap.active .label {
+  color: #ffffff;
+}
+.cap:hover .cap-chevron,
+.cap:focus-visible .cap-chevron,
+.cap.lit .cap-chevron,
+.cap.active .cap-chevron {
+  color: #00a898;
+}
+
+/* focus-visible & active → full dark fill behind label */
+.cap:focus-visible .fill,
+.cap.active .fill {
+  width: 200%;
+  height: 200%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* reduced-motion → instant background, no circle sweep */
+@media (prefers-reduced-motion: reduce) {
+  .cap:hover,
+  .cap:focus-visible,
+  .cap.lit,
+  .cap.active {
+    background: var(--ink, #1c1c1c);
+  }
+}
+
+/* ── logo capsule with cycling suffix ── */
+.logo-cap {
+  padding: 0 1.1rem;
+  gap: 0;
+}
+.logo-lock {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.logo-cap img {
+  height: calc(var(--pill-h) * 0.62);
+  width: auto;
+  display: block;
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.docked .logo-cap img {
+  height: calc(var(--pill-h-docked) * 0.62);
+}
+.logo-cap:hover img {
+  transform: scale(1.035);
+}
+.logo-tag {
+  display: flex;
+  align-items: baseline;
+  margin-left: 0.28em;
+  transform: translateY(-0.055em);
+}
+.logo-dot {
+  font-family: var(--font-nunito, "Nunito"), var(--font-body);
+  font-weight: 900;
+  color: #e81820;
+  font-size: calc(var(--pill-h) * 0.30);
+  line-height: 1;
+  margin-right: 0.06em;
+}
+.logo-suffix {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: baseline;
+  font-family: var(--font-nunito, "Nunito"), var(--font-body);
+  font-weight: 800;
+  font-size: calc(var(--pill-h) * 0.285);
+  letter-spacing: -0.012em;
+  line-height: 1;
+  color: #585858;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo-suffix > span {
+  display: inline-block;
+  transition:
+    transform 0.22s cubic-bezier(0.34, 1.5, 0.64, 1),
+    opacity 0.18s ease;
+}
+.logo-suffix.swap > span {
+  transform: translateY(-0.85em);
+  opacity: 0;
+}
+
+/* ── nav group: individual pills that dock together on scroll ── */
+.rad-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+  border-radius: var(--cap-radius);
+  background: transparent;
+  position: relative;
+  transition:
+    gap 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.45s ease,
+    padding 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rad-nav-group .cap {
+  position: relative;
+  z-index: 1;
+}
+.docked .rad-nav-group {
+  gap: 0;
+  padding: 0.28rem;
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1.5);
+}
+.docked .rad-nav-group .cap,
+.docked .logo-cap,
+.docked .cta-cap {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  padding: 0 0.95rem;
+  height: var(--pill-h-docked);
+}
+.docked .rad-nav-group .cap:hover,
+.docked .logo-cap:hover,
+.docked .cta-cap:hover {
+  background: transparent;
+}
+
+/* ── travelling dark highlight inside the docked bar ── */
+.glide {
+  position: absolute;
+  top: 0.28rem;
+  left: 0;
+  height: calc(100% - 0.56rem);
+  z-index: 0;
+  border-radius: var(--cap-radius);
+  background: var(--ink, #1c1c1c);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease;
+}
+.docked .rad-nav-group:hover .glide { opacity: 1; }
+
+/* ── chevron for toggle buttons ── */
+.cap-chevron {
+  width: 9px;
+  height: 9px;
+  border-right: 1.8px solid currentColor;
+  border-bottom: 1.8px solid currentColor;
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+.cap[aria-expanded="true"] .cap-chevron {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+/* ── CTA capsule ── */
+.cta-cap {
+  background: var(--rad-teal);
+  color: var(--ink, #1c1c1c);
+  font-weight: 700;
+  padding: 0 1.45rem;
+}
+
+/* ── floating dropdown panel ── */
+.rad-panel {
+  position: fixed;
+  top: calc(100% + 0.5rem);
+  left: var(--gutter, clamp(1rem, 2.6vw, 2.25rem));
+  right: var(--gutter, clamp(1rem, 2.6vw, 2.25rem));
+  background: rgba(23, 17, 19, 0.96);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 26px;
+  border: 1px solid rgba(242, 236, 228, 0.1);
+  color: var(--text-primary, #f2ece4);
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0 2rem;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease,
+    padding 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 60;
+}
+.rad-panel.open {
+  max-height: 420px;
+  opacity: 1;
+  padding: 2rem;
+}
+.rad-panel a {
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary, #f2ece4);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(242, 236, 228, 0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rad-panel.open a {
+  opacity: 1;
+  transform: none;
+}
+.rad-panel a strong {
+  display: block;
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.rad-panel a span {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 400;
+  color: rgba(242, 236, 228, 0.55);
+  margin-top: 0.2rem;
+}
+.rad-panel a:hover strong {
+  color: var(--rad-red);
+}
+
+/* ── scrim behind open panel ── */
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 7, 8, 0.34);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 55;
+}
+.scrim.on {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------------------ */
+/* Mobile nav staggered item entry                                      */
+/* ------------------------------------------------------------------ */
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item-in {
+  animation: menu-item-in 320ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}

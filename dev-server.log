@@ -1,0 +1,12 @@
+
+> radimpression@0.1.0 dev
+> next dev
+
+▲ Next.js 16.3.3 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.8.0.10:3000
+✓ Ready in 6.1s
+✓ Running next.config.ts took 328ms
+
+ GET / 200 in 1261ms (next.js: 766ms, application-code: 495ms)
+ GET / 200 in 616ms (next.js: 81ms, application-code: 535ms)
